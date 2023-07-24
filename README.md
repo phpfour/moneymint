@@ -3,7 +3,7 @@
 MoneyMint is a simple app for tracking expenses, budgeting, and getting an overview of your personal finance. It's built upon Laravel ecosystem's two newest members: NativePHP and Livewire v3.
 
 <p align="center">
-  <img alt="MoneyMint" src="https://pbs.twimg.com/media/F1x-uLpaEAAfYhS?format=jpg&name=4096x4096" width="800" style="max-width: 100%;">
+  <img alt="MoneyMint" src="https://github.com/phpfour/moneymint/assets/171715/e91cb8ef-507a-4b34-9e7e-ad42fa25fad4" style="max-width: 100%;">
 </p>
 
 ## Contributing
