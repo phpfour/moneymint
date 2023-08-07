@@ -51,8 +51,8 @@
                             </div>
                         </div>
                         <div class="mt-6 flex space-x-3 md:ml-4 md:mt-0">
-                            <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Add Income</button>
-                            <button type="button" class="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600">Add Expense</button>
+                            <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onclick="openIncomeModal()">Add Income</button>
+                            <button type="button" class="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600" onclick="openExpenseModal()">Add Expense</button>
                         </div>
                     </div>
                 </div>
@@ -137,35 +137,54 @@
                                     <thead>
                                     <tr>
                                         <th class="bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900" scope="col">Transaction</th>
-                                        <th class="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900" scope="col">Amount</th>
+                                        <th class="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900" scope="col">Income</th>
+                                        <th class="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900" scope="col">Expense</th>
                                         <th class="hidden bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 md:block" scope="col">Status</th>
                                         <th class="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900" scope="col">Date</th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                    <tr class="bg-white">
-                                        <td class="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                                            <div class="flex">
-                                                <a href="#" class="group inline-flex space-x-2 truncate text-sm">
-                                                    <svg class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M1 4a1 1 0 011-1h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4zm12 4a3 3 0 11-6 0 3 3 0 016 0zM4 9a1 1 0 100-2 1 1 0 000 2zm13-1a1 1 0 11-2 0 1 1 0 012 0zM1.75 14.5a.75.75 0 000 1.5c4.417 0 8.693.603 12.749 1.73 1.111.309 2.251-.512 2.251-1.696v-.784a.75.75 0 00-1.5 0v.784a.272.272 0 01-.35.25A49.043 49.043 0 001.75 14.5z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p class="truncate text-gray-500 group-hover:text-gray-900">Payment to Molly Sanders</p>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                                            <span class="font-medium text-gray-900">$20,000</span>
-                                            USD
-                                        </td>
-                                        <td class="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
-                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800 capitalize">success</span>
-                                        </td>
-                                        <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                                            <time datetime="2020-07-11">July 11, 2020</time>
-                                        </td>
-                                    </tr>
+                                     @foreach($transactionList as $transaction)
+                                         <tr class="bg-white">
+                                             <td class="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                                                 <div class="flex">
+                                                     <a href="#" class="group inline-flex space-x-2 truncate text-sm">
+                                                         <svg class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                             <path fill-rule="evenodd" d="M1 4a1 1 0 011-1h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4zm12 4a3 3 0 11-6 0 3 3 0 016 0zM4 9a1 1 0 100-2 1 1 0 000 2zm13-1a1 1 0 11-2 0 1 1 0 012 0zM1.75 14.5a.75.75 0 000 1.5c4.417 0 8.693.603 12.749 1.73 1.111.309 2.251-.512 2.251-1.696v-.784a.75.75 0 00-1.5 0v.784a.272.272 0 01-.35.25A49.043 49.043 0 001.75 14.5z" clip-rule="evenodd" />
+                                                         </svg>
+                                                         <p class="truncate text-gray-500 group-hover:text-gray-900">{{ $transaction->title }}</p>
+                                                     </a>
+                                                 </div>
+                                             </td>
+                                             <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                                                 <span class="font-medium text-gray-900">${{ number_format($transaction->credit, 0, '.', ',') }}</span>
+                                                 USD
+                                             </td>
+                                             <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                                                 <span class="font-medium text-gray-900">${{ number_format($transaction->debit, 0, '.', ',') }}</span>
+                                                 USD
+                                             </td>
+                                             <td class="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
+                                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+                                                    @if($transaction->status === 'Success')
+                                                        bg-green-100 text-green-800
+                                                    @elseif($transaction->status === 'Failed')
+                                                        bg-red-100 text-red-800
+                                                    @elseif($transaction->status === 'Pending')
+                                                        bg-yellow-100 text-yellow-800
+                                                    @else
+                                                        bg-gray-100 text-gray-800
+                                                    @endif
+                                                    capitalize">
+                                                    {{ $transaction->status }}
+                                                </span>
+                                             </td>
 
+                                             <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                                                 <time datetime="2020-07-11">{{$transaction->created_at->format('F j, Y')}}</time>
+                                             </td>
+                                         </tr>
+                                     @endforeach
                                     <!-- More transactions... -->
                                     </tbody>
                                 </table>
@@ -195,5 +214,91 @@
         </main>
     </div>
 </div>
+
+<!-- Add Income Modal -->
+<div id="incomeModal" class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-md shadow-md" style="width: 30%;">
+        <h2 class="text-lg font-semibold mb-4">Add Income</h2>
+        <form action="{{ route('transaction.store') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <label for="title" class="block font-semibold">Title <span class="text-red-500">*</span></label>
+                <input type="text" name="title" id="title" required class="w-full border rounded-md px-3 py-2">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block font-semibold">Description</label>
+                <textarea name="description" id="description" class="w-full border rounded-md px-3 py-2"></textarea>
+            </div>
+            <div class="mb-4" style="width: 25%">
+                <label for="credit" class="block font-semibold">Credit</label>
+                <input type="number" name="credit" id="credit" class="w-full border rounded-md px-3 py-2">
+            </div>
+            <div class="mb-4" style="width: 25%">
+                <label for="status" class="block font-semibold">Status</label>
+                <select name="status" id="status" class="w-full border rounded-md px-3 py-2">
+                    <option value="Success">Success</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-cyan-600 text-white font-semibold rounded-md hover:bg-cyan-500 mr-2" onclick="closeIncomeModal()">Submit</button>
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-900 font-semibold rounded-md hover:bg-gray-400" onclick="closeIncomeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Expense Modal -->
+<div id="expenseModal" class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-md shadow-md" style="width: 30%;">
+        <h2 class="text-lg font-semibold mb-4">Add Expense</h2>
+        <form action="{{ route('transaction.store') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <label for="title" class="block font-semibold">Title <span class="text-red-500">*</span></label>
+                <input type="text" name="title" id="title" required class="w-full border rounded-md px-3 py-2">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block font-semibold">Description</label>
+                <textarea name="description" id="description" class="w-full border rounded-md px-3 py-2"></textarea>
+            </div>
+            <div class="mb-4" style="width: 25%">
+                <label for="credit" class="block font-semibold">Debit</label>
+                <input type="number" name="credit" id="debit" class="w-full border rounded-md px-3 py-2">
+            </div>
+            <div class="mb-4" style="width: 25%">
+                <label for="status" class="block font-semibold">Status</label>
+                <select name="status" id="status" class="w-full border rounded-md px-3 py-2">
+                    <option value="Success">Success</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-cyan-600 text-white font-semibold rounded-md hover:bg-cyan-500 mr-2" onclick="closeExpenseModal()">Submit</button>
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-900 font-semibold rounded-md hover:bg-gray-400" onclick="closeExpenseModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
+<script>
+    function openIncomeModal() {
+        document.getElementById('incomeModal').classList.remove('hidden');
+    }
+
+    function closeIncomeModal() {
+        document.getElementById('incomeModal').classList.add('hidden');
+    }
+
+    function openExpenseModal() {
+        document.getElementById('expenseModal').classList.remove('hidden');
+    }
+
+    function closeExpenseModal() {
+        document.getElementById('expenseModal').classList.add('hidden');
+    }
+</script>
